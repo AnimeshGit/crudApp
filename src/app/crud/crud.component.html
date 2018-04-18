@@ -1,0 +1,74 @@
+<div class="container">
+  <h2> SImple CRUD Application</h2>
+  <p>Student record List:</p>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Firstname</th>
+        <th>Lastname</th>
+        <th>Email</th>
+        <th>Phone</th>
+        <th></th>
+        <th></th>
+
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let data of student_record, let i= index">
+        <td>{{data.firstname}}</td>
+        <td>{{data.lastname}}</td>
+        <td>{{data.email}}</td>
+        <td>{{data.phone}}</td>
+        <td>
+          <button type="button" class="btn btn-danger" (click)="onDeleteClick(data,i)">Delete</button>
+        </td>
+        <td>
+          <button type="button" class="btn btn-info" (click)="onEditClick(data,i)" data-toggle="modal" data-target="#myModal"> Edit
+          </button>
+        </td>
+      </tr>
+    </tbody>
+
+
+    <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal" (click)="onModelAddClick()">Add Record</button>
+
+    <!-- Modal -->
+    <div id="myModal" class="modal fade" role="dialog">
+      <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title">Add/Delete Record</h4>
+          </div>
+          <div class="modal-body">
+            <div class="form-group">
+              <label for="usr">Firstname:</label>
+              <input type="text" class="form-control" id="usr" [(ngModel)]="f_name">
+            </div>
+            <div class="form-group">
+              <label for="usr">Lastname:</label>
+              <input type="text" class="form-control" id="usr" [(ngModel)]="l_name">
+            </div>
+            <div class="form-group">
+              <label for="usr">Email:</label>
+              <input type="text" class="form-control" id="usr" [(ngModel)]="email">
+            </div>
+            <div class="form-group">
+              <label for="usr">Phone:</label>
+              <input type="text" class="form-control" id="usr" [(ngModel)]="phone">
+            </div>
+          </div>
+          <div class="modal-footer" *ngIf="!flag_for_edit">
+            <button type="button" class="btn btn-default" data-dismiss="modal" (click)="onAddClick()">Add</button>
+          </div>
+          <div class="modal-footer" *ngIf="flag_for_edit">
+            <button type="button" class="btn btn-default" data-dismiss="modal" (click)="onEditSaveClick()">Edit</button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </table>
+</div>
